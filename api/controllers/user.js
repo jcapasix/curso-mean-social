@@ -3,6 +3,8 @@ var bcrypt = require('bcrypt-nodejs')
 var mongoosePaginate = require('mongoose-pagination');
 var User = require('../models/user');
 var Follow = require('../models/follow');
+var Publication = require('../models/publication');
+
 
 var jwt = require('../services/jwt');
 var fs = require('fs');
@@ -124,7 +126,8 @@ function getUser(req, res){
 			return res.status(200).send({ 
 				user, 
 				following: value.following,
-				followed: value.followed
+				followed: value.followed,
+				publications: publications
 			});
 		});
 
@@ -316,9 +319,15 @@ async function getCountFollow(user_id){
 		return count;
 	});
 
+	var publications = await Publication.count({'user':user_id}, (err, count)=>{
+		if(err) return handleError(err)
+		return count;
+	});
+
 	return {
 		following: following,
-		followed: followed
+		followed: followed,
+		publications: publications
 	}
 }
 
