@@ -179,26 +179,14 @@ function getUsers(req, res){
 }
 
 async function followUserIds(user_id){
-	//var query = this.find({}, 'key name', cb);
-
-	// var following = await Follow.find({'user':user_id}).select({'_id':0, '__v':0, 'user':0},(err, follows)=>{
-	// 	return follows;
-	// });
 
 	var following = await Follow.find({"user": user_id }).select({'_id':0, '__v':0, 'user':0}).exec().then((follows) => {
 		return follows;
 	});
 
-	// var followed = await Follow.find({'followed':user_id}).select({'_id':0, '__v':0, 'followed':0}, (err, follows)=>{
-	// 	return follows
-	// });
-
 	var followed = await Follow.find({"followed": user_id }).select({'_id':0, '__v':0, 'user':0}).exec().then((follows) => {
 		return follows;
 	});
-
-	console.log("jordan")
-	console.log(following, followed);
 
 	//procesar following ids
 	var following_clean = [];
@@ -218,8 +206,6 @@ async function followUserIds(user_id){
 		following: following_clean,
 		followed: followed_clean
 	}
-
-	
 }
 
 function updateUser(req, res){
@@ -305,6 +291,37 @@ function getImageFile(req, res){
 	});
 }
 
+
+function getCounters(req, res){
+	var userId = req.user.sub;
+
+	if(req.params.id){
+		userId = req.params.id;
+	}
+
+	getCountFollow(userId).then((value)=>{
+		return res.status(200).send(value);
+	});
+}
+
+async function getCountFollow(user_id){
+
+	var following = await Follow.count({'user':user_id}, (err, count)=>{
+		if(err) return handleError(err)
+		return count;
+	});
+
+	var followed = await Follow.count({'followed':user_id}, (err, count)=>{
+		if(err) return handleError(err)
+		return count;
+	});
+
+	return {
+		following: following,
+		followed: followed
+	}
+}
+
 module.exports = {
 	home,
 	pruebas,
@@ -314,5 +331,6 @@ module.exports = {
 	getUsers,
 	updateUser,
 	uploadImage,
-	getImageFile
+	getImageFile,
+	getCounters
 }
