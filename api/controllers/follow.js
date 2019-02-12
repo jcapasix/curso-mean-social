@@ -78,7 +78,7 @@ function getFollowedUsers(req, res){
     }
 
     var itemsPerPage = 4;
-    
+
     //Follow.find({followed:userId}).populate('user').paginate(page, itemsPerPage, (err, follows, total)=>{
     Follow.find({followed:userId}).populate({path: 'user'}).paginate(page, itemsPerPage, (err, follows, total)=>{
         if(err) return res.status(500).send({message: 'Error en el servidor'});
@@ -92,10 +92,28 @@ function getFollowedUsers(req, res){
     });
 }
 
+//Devolver listados de usuarios
+function getMyFollows(req, res){
+    var userId = req.user.sub;
+
+    var find = Follow.find({user: userId});
+
+    if(req.params.followed){
+        find = Follow.find({followed: userId});
+    }
+
+    find.populate('user followed').exec((err, follows)=>{
+        if(err) return res.status(500).send({message: 'Error en el servidor'});
+        if(!follows) return res.status(404).send({message: 'No te digue ningun usuario'});
+        return res.status(200).send({follows});
+    });
+}
+
 module.exports = {
     prueba,
     saveFollow,
     deleteFollow,
     getFollowingUsers,
-    getFollowedUsers
+    getFollowedUsers,
+    getMyFollows
 }
