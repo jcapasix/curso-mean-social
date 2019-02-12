@@ -117,6 +117,8 @@ function getUser(req, res){
 		if(err) return res.status(500).send({message: 'Error en ela peticion'});
 		if(!user) return res.status(404).send({message: 'El usuario no existe'});
 
+		user.password = undefined
+
 		followsThisUser(req.user.sub, userId).then((value)=>{
 			console.log(value);
 			return res.status(200).send({ 
@@ -162,13 +164,62 @@ function getUsers(req, res){
 		if(err) return res.status(500).send({message: 'Error en ela peticion'});
 		if(!users) return res.status(404).send({message: 'No hay usuarios disponibles'});
 
-		return res.status(200).send({
-			users, 
-			total,
-			pages: Math.ceil(total/itemsPerPage)
+		followUserIds(identity_user_id).then((value)=>{
+
+			return res.status(200).send({
+				users,
+				users_following: value.following,
+				users_follow_me: value.followed,
+				total,
+				pages: Math.ceil(total/itemsPerPage)
+			});
 		});
 
 	});
+}
+
+async function followUserIds(user_id){
+	//var query = this.find({}, 'key name', cb);
+
+	// var following = await Follow.find({'user':user_id}).select({'_id':0, '__v':0, 'user':0},(err, follows)=>{
+	// 	return follows;
+	// });
+
+	var following = await Follow.find({"user": user_id }).select({'_id':0, '__v':0, 'user':0}).exec().then((follows) => {
+		return follows;
+	});
+
+	// var followed = await Follow.find({'followed':user_id}).select({'_id':0, '__v':0, 'followed':0}, (err, follows)=>{
+	// 	return follows
+	// });
+
+	var followed = await Follow.find({"followed": user_id }).select({'_id':0, '__v':0, 'user':0}).exec().then((follows) => {
+		return follows;
+	});
+
+	console.log("jordan")
+	console.log(following, followed);
+
+	//procesar following ids
+	var following_clean = [];
+	following.forEach((follow)=>{
+		following_clean.push(follow.followed);
+	});
+
+	//procesar following ids
+	var followed_clean = [];
+
+	followed.forEach((follow)=>{
+		followed_clean.push(follow.followed);
+	});
+
+	//procesar followed ids
+	return{
+		following: following_clean,
+		followed: followed_clean
+	}
+
+	
 }
 
 function updateUser(req, res){
