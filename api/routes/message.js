@@ -10,6 +10,6 @@ var md_auth = require('../middlewares/authenticated');
 //var md_upload = multipart({uploadDir: './uploads/publications'})
 
 api.get('/probando-md', md_auth.ensureAuth, MessageController.probando);
-
+api.post('/message', md_auth.ensureAuth, MessageController.saveMessage);
 
 module.exports = api;
