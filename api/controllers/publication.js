@@ -67,8 +67,30 @@ function getPublications(req, res){
     })
 }
 
+function getPublication(req, res){
+    var publicationId = req.params.id;
+
+    Publication.findById(publicationId, (err, publication) =>{
+        if(err) return res.status(500).send({message: 'Error devolver publicacion'});
+        if(!publication) return res.status(404).send({message: 'No existe la publicacion'});
+        return res.status(200).send({publication});
+    });
+}
+
+function deletePublication(req, res){
+    var publicacionId = req.params.id;
+
+    Publication.find({user: req.user.sub, '_id':publicacionId}).remove(err =>{
+        if(err) return res.status(500).send({message: 'Error al borrar publicacion'});
+        //if(!publication) return res.status(404).send({message: 'No se ha borrada la publicacion'});
+        return res.status(200).send({message: 'Publicacion eliminada correctamente'});
+    });
+}
+
 module.exports = {
     probando,
     savePublication,
-    getPublications
+    getPublications,
+    getPublication,
+    deletePublication
 }
