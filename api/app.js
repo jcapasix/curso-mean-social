@@ -9,6 +9,8 @@ var app = express();
 var user_router = require('./routes/user');
 var follow_router = require('./routes/follow');
 var publication_router = require('./routes/publication');
+var message_router = require('./routes/message');
+
 
 //middlewares
 app.use(bodyParser.urlencoded({extended: false}));
@@ -20,6 +22,7 @@ app.use(bodyParser.json());
 app.use('/api', user_router);
 app.use('/api', follow_router);
 app.use('/api', publication_router);
+app.use('/api', message_router);
 
 //exportar
 module.exports = app;
