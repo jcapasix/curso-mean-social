@@ -22,6 +22,7 @@ import { from } from 'rxjs';
     BrowserModule,
     //AppRoutingModule,
     routing,
+    HttpClientModule,
     FormsModule
   ],
   providers: [appRoutingProviders],
