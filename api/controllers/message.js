@@ -42,12 +42,9 @@ function getReceivedMessage(req, res){
     if(req.params.page){
         page = req.params.page;
     }
-
     var itemsPerPage = 4;
 
-    //Follow.find({user:userId}).populate({path: 'followed'}).paginate(page, itemsPerPage, (err, follows, total)=>{
-
-    Message.find({receiver: userId}).populate({path: 'emitter'}).paginate(page, itemsPerPage, (err, messages, total) =>{
+    Message.find({receiver: userId}).populate('emitter', 'name image nick surname _id').paginate(page, itemsPerPage, (err, messages, total) =>{
         if(err) return res.status(500).send({message: 'Error en ela peticion'});
         if(!messages) return res.status(500).send({message: 'No hay mensajes'});
 
