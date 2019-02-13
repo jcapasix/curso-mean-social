@@ -13,6 +13,7 @@ api.get('/probando-md', md_auth.ensureAuth, MessageController.probando);
 api.post('/message', md_auth.ensureAuth, MessageController.saveMessage);
 api.get('/my-message/:page?', md_auth.ensureAuth, MessageController.getReceivedMessage);
 api.get('/message/:page?', md_auth.ensureAuth, MessageController.getEmmitMessage);
+api.get('/unviewed-message/:page?', md_auth.ensureAuth, MessageController.getUnViewedMessages);
 
 
 module.exports = api;
