@@ -33,10 +33,34 @@ function saveMessage(req, res){
 
         return res.status(200).send({message: messageStored});
     });
+}
 
+function getReceivedMessage(req, res){
+    var userId = req.user.sub;
+    var page = 1;
+
+    if(req.params.page){
+        page = req.params.page;
+    }
+
+    var itemsPerPage = 4;
+
+    //Follow.find({user:userId}).populate({path: 'followed'}).paginate(page, itemsPerPage, (err, follows, total)=>{
+
+    Message.find({receiver: userId}).populate({path: 'emitter'}).paginate(page, itemsPerPage, (err, messages, total) =>{
+        if(err) return res.status(500).send({message: 'Error en ela peticion'});
+        if(!messages) return res.status(500).send({message: 'No hay mensajes'});
+
+        return res.status(200).send({
+            total: total,
+            pages: Math.ceil(total/itemsPerPage),
+            messages
+        });
+    });
 }
 
 module.exports = {
     probando,
-    saveMessage
+    saveMessage,
+    getReceivedMessage
 }
