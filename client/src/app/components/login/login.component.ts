@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit{
     
     public title:string;
     public user:User;
+    public identity;
+    public token;
     public status:string;
 
     constructor(
@@ -29,19 +31,56 @@ export class LoginComponent implements OnInit{
     }
 
     onSubmit(){
-        this._userService.register(this.user).subscribe(
+        this._userService.signup(this.user).subscribe(
             response => {
-                if(response.user && response.user._id){
-                    console.log('success');
-                    this.status = 'success';
+                this.identity = response.user;
+                console.log(this.identity);
+                if(!this.identity || !this.identity._id){
+
                 }
                 else{
-                    console.log('error')
-                    this.status = 'error';
+                    this.status = 'success';
+                    //PERSISTIR DATOS DEL USUARIO
+
+                    //conseguir el token
+                    this.getToken()
                 }
+                
             },
             error => {
-                console.log(<any>error);
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    this.status = 'error';
+                }
+            }
+        );
+    }
+
+    getToken(){
+        this._userService.signup(this.user, 'true').subscribe(
+            response => {
+                this.token = response.token;
+                console.log(this.token);
+                if(this.token.length <= 0){
+                    this.status = 'error';
+                }
+                else{
+                    this.status = 'success';
+                    //PERSISTIR DATOS DEL USUARIO
+
+                    //conseguir el token
+                }
+                
+            },
+            error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    this.status = 'error';
+                }
             }
         );
     }

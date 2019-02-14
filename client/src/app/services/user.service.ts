@@ -19,5 +19,18 @@ export class UserService{
 
         return this._http.post(this.url + 'register', params, {headers: headers});
     }
+
+    signup(user:any, gettoken = null): Observable<any>{
+        if(gettoken != null){
+            user.gettoken = gettoken;
+            //console.log(user.gettoken);
+            
+        }
+
+        let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+
+        return this._http.post(this.url + 'login', params, {headers: headers});
+    }
 }
 
