@@ -14,6 +14,7 @@ import { GLOBAL } from '../../services/global';
 export class UsersComponent implements OnInit{
     
     public title:string;
+    public url:string;
     public user:User;
     public identity;
     public token;
@@ -35,6 +36,7 @@ export class UsersComponent implements OnInit{
         this.user = this._userService.getIdentity();
         this.identity = this.user;
         this.token = this._userService.getToken();
+        this.url = GLOBAL.url;
     }
 
     ngOnInit(){
@@ -44,20 +46,20 @@ export class UsersComponent implements OnInit{
 
     actualPage(){
         this._route.params.subscribe(params =>{
-            let page = params['page'];
+            let page = +params['page'];
             this.page = page;
 
             if(!page){
+                console.log('page is null')
                 this.page = 1
             }
-            else{
-                this.next_page = page + 1;
-                this.prev_page = page - 1;
+            this.next_page = this.page + 1;
+            this.prev_page = this.page - 1;
 
-                if(this.prev_page<=0){
-                    this.prev_page = 1
-                }
+            if(this.prev_page <= 0){
+                this.prev_page = 1
             }
+
 
             //devolver listado de usuarios
             this.getUsers(page)
@@ -74,7 +76,7 @@ export class UsersComponent implements OnInit{
                 else{
                     console.log(response)
                     this.total = response.total;
-                    this.user = response.users;
+                    this.users = response.users;
                     this.pages = response.pages;
 
                     if(page > this.pages){
