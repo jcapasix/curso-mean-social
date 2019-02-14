@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit{
                 }
                 else{
                     console.log('jordan')
-                    this.status = 'success';
+                    // this.status = 'success';
                     //PERSISTIR DATOS DEL USUARIO
                     localStorage.setItem('identity', JSON.stringify(this.identity))
                     //conseguir el token
@@ -68,14 +68,32 @@ export class LoginComponent implements OnInit{
                     this.status = 'error';
                 }
                 else{
-                    this.status = 'success';
+                    // this.status = 'success';
                     //PERSISTIR DATOS DEL USUARIO
-                    localStorage.setItem('token', this.token)
+                    localStorage.setItem('token', this.token);
                     //conseguir el token
-
-                    this._router.navigate(['/']);
+                    this.getCounters();
                 }
                 
+            },
+            error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    this.status = 'error';
+                }
+            }
+        );
+    }
+
+    getCounters(){
+        this._userService.getCounters().subscribe(
+            response => {
+                console.log(response);
+                localStorage.setItem('stats', JSON.stringify(response));
+                this.status = 'success'
+                this._router.navigate(['/']);
             },
             error => {
                 var errorMessage = <any>error;
