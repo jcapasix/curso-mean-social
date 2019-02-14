@@ -22,6 +22,6 @@ export class HomeComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('Componente de login cargado...')
+        console.log('Componente de home cargado...')
     }
 }
