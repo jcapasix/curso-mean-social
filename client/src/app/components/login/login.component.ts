@@ -39,9 +39,10 @@ export class LoginComponent implements OnInit{
 
                 }
                 else{
+                    console.log('jordan')
                     this.status = 'success';
                     //PERSISTIR DATOS DEL USUARIO
-
+                    localStorage.setItem('identity', JSON.stringify(this.identity))
                     //conseguir el token
                     this.getToken()
                 }
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit{
                 else{
                     this.status = 'success';
                     //PERSISTIR DATOS DEL USUARIO
-
+                    localStorage.setItem('token', this.token)
                     //conseguir el token
                 }
                 
