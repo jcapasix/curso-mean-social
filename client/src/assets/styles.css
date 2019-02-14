@@ -24,3 +24,33 @@
 .navigation .navbar *{
     color: white !important;
 }
+
+.active{
+    background:#cc1717 !important;
+}
+
+.navigation .navbar a:hover{
+    background:#cc1717 !important;
+}
+
+.jumbotron{
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn{
+    margin: 3px !important;
+}
+
+.navigation .dropdown-menu *{
+    color: black !important;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+    background: #cc1717 !important;
+}
+
+.navigation .navbar .dropdown-menu a:hover{
+    background:#eee !important;
+}
