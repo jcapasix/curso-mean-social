@@ -72,6 +72,8 @@ export class LoginComponent implements OnInit{
                     //PERSISTIR DATOS DEL USUARIO
                     localStorage.setItem('token', this.token)
                     //conseguir el token
+
+                    this._router.navigate(['/']);
                 }
                 
             },
