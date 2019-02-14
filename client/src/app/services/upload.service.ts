@@ -1,15 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-// import { HttpClient, HttpHeaders} from '@angular/common/http';
-// import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
-// import { User } from '../models/user';
 
 @Injectable()
 export class UploadService{
     public url:String;
-    // public identity;
-    // public token;
-    // public stats;
 
     constructor(){
         this.url = GLOBAL.url;
@@ -20,8 +14,12 @@ export class UploadService{
         return new Promise(function(resolve, reject){
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
-
+            console.log('jordan');
+            console.log(files.length);
             for(var i=0; i < files.length; i++){
+                console.log(name);
+                console.log(files[i]);
+                console.log(files[i].name);
                 formData.append(name, files[i], files[i].name);
             }
 
@@ -38,6 +36,7 @@ export class UploadService{
 
             xhr.open('POST', url, true);
             xhr.setRequestHeader('Authorization', token);
+            console.log(formData);
             xhr.send(formData)
         }); 
 
