@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-lg-7">
     <h1 class="h1-strong">{{title}}</h1>
 
     <div class="people">
@@ -54,11 +54,17 @@
             <li *ngIf="page > 1"><a [routerLink]="['/gente', prev_page]">Anterior</a></li>
             <li *ngIf="pages != page"><a [routerLink]="['/gente', next_page]">Siguiente</a></li>
         </ul>
+
+        <br>
+        <br>
     </div>
 
 </div>
 
-<sidebar></sidebar>
+<div class="col-lg-5">
+    <sidebar></sidebar>
+</div>
 
-<div class="clearfix"></div>
+
+
         
