@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
+import { Publication} from '../../models/publication';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class SidebarComponent implements OnInit{
     public token;
     public status:string;
     public url:string;
+    public publication:Publication;
 
     constructor(
         private _route: ActivatedRoute,
@@ -28,6 +30,8 @@ export class SidebarComponent implements OnInit{
         this.token = this._userService.getToken();
         this.stats = this._userService.getStats();
         this.url = GLOBAL.url;
+
+        this.publication = new Publication("", "", "", "", this.identity._id);
     }
 
     ngOnInit(){
@@ -35,7 +39,7 @@ export class SidebarComponent implements OnInit{
     }
 
     onSubmit(){
-
+        console.log(this.publication);
     }
 
 }
