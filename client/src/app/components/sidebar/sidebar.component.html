@@ -1,11 +1,17 @@
-<div id="user-card" class="col-lg-4 panel panel-default pull-left">
-    <div class="avatar">
+<div class="col-lg-6 sidebar-32">
+        <h1 class="h1-strong">
+            Hola, {{identity.name}}
+        </h1>
+</div>
+
+<div id="user-card" class="col-lg-5 panel panel-default pull-left">
+    <div class="avatar pull-left">
         <img src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="identity.image" />
         <img src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="!identity.image" />
     </div>
 
-    <div class="name-surname">
-        <a href="#">{{identity.name + ' ' + identity.surname}}</a>
+    <div class="name-surname pull-left">
+        <a href="#" class="username">{{identity.name + ' ' + identity.surname}}</a>
         <p class="nickname">{{identity.nick}}</p>
         <div class="clearfix"></div>
     </div>
