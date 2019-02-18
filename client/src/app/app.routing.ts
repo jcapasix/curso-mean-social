@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent} from './components/user-edit/user-edit.component';
 import { UsersComponent} from './components/users/users.component';
 import { TimelineComponent} from './components/timeline/timeline.component';
+import { ProfileComponent} from './components/profile/profile.component';
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     {path: 'gente/:page', component: UsersComponent},
     {path: 'gente', component: UsersComponent},
     {path: 'timeline', component: TimelineComponent},
+    {path: 'profile/:id', component: ProfileComponent},
     {path: '**', component: HomeComponent},
 ]; 
 
