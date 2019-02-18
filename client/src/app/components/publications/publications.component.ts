@@ -1,19 +1,19 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Publication } from '../../models/publication';
-import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
 import { $ } from 'protractor';
 
 
 @Component({
-    selector: "timeline",
-    templateUrl: './timeline.component.html',
-    providers: [UserService, PublicationService]
+    selector: "publications",
+    templateUrl: './publications.component.html',
+    providers: [PublicationService, UserService]
 })
 
-export class TimelineComponent implements OnInit{
+export class PublicationsComponent implements OnInit{
     
     public title:string;
     public url:string;
@@ -37,10 +37,11 @@ export class TimelineComponent implements OnInit{
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        private _userService: UserService,
-        private _publicationService: PublicationService
+        private _publicationService: PublicationService,
+        private _userService:UserService
+
     ){ 
-        this.title = 'Timeline';
+        this.title = 'Publications';
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
     }
@@ -103,11 +104,6 @@ export class TimelineComponent implements OnInit{
             this.page += 1;
         }
         this.getPublications(this.page, true);
-    }
-
-    refresh(event){
-        this.getPublications(1);
-        console.log(event);
     }
 
  

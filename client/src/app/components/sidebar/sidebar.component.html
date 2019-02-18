@@ -63,7 +63,7 @@
                 Publicacion enviada
             </div>
 
-            <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm)" class="col-lg-10">
+            <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm); sendPublication($event)" class="col-lg-10">
                 <p>
                     <label>Que estas pensando hoy?</label>
         

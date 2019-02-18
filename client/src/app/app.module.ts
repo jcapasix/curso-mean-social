@@ -15,6 +15,7 @@ import { UserEditComponent} from './components/user-edit/user-edit.component';
 import { UsersComponent} from './components/users/users.component';
 import { SidebarComponent} from './components/sidebar/sidebar.component';
 import { TimelineComponent} from './components/timeline/timeline.component';
+import { PublicationsComponent} from './components/publications/publications.component';
 
 
 import { from } from 'rxjs';
@@ -29,7 +30,8 @@ import { from } from 'rxjs';
     UserEditComponent,
     UsersComponent,
     SidebarComponent,
-    TimelineComponent
+    TimelineComponent,
+    PublicationsComponent
   ],
 
   imports: [
