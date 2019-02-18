@@ -50,6 +50,8 @@ function getPublications(req, res){
             follows_clean.push(follow.followed);
         })
 
+        follows_clean.push(req.user.sub);
+
         console.log(follows_clean)
 
         Publication.find({user: {"$in": follows_clean}}).sort('-created_at').populate('user').paginate(page, itemsPerPage, (err, publications, total)=>{
