@@ -4,6 +4,7 @@ import { Publication } from '../../models/publication';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
 import { GLOBAL } from '../../services/global';
+import { $ } from 'protractor';
 
 
 @Component({
@@ -66,6 +67,8 @@ export class TimelineComponent implements OnInit{
                         var arrayA = this.publications;
                         var arrayB = response.publications;
                         this.publications = arrayA.concat(arrayB);
+
+                        // $("html, body").animate({scrollTop: $('body').prop('scrollHeight')}, 500);
                     }
 
                     // if(page > this.pages){
