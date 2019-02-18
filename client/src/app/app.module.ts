@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-
-import {routing, appRoutingProviders } from './app.routing';
+import { routing, appRoutingProviders } from './app.routing';
+import { MomentModule} from 'angular2-moment';
 
 import { AppRoutingModule } from './app-routing.module';
 //Componentes
@@ -37,7 +37,8 @@ import { from } from 'rxjs';
     //AppRoutingModule,
     routing,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MomentModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

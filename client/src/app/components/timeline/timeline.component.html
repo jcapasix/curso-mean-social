@@ -15,8 +15,15 @@
                         </a>
                     </div>
 
-                    <div>{{publication.user.name + ' ' + publication.user.surname}}</div>
-
+                    <div>
+                        <span class="user-name">
+                            {{publication.user.name + ' ' + publication.user.surname}}
+                        </span>
+                        |
+                        <span class="date">
+                            {{ (publication.create_at | amTimeAgo )}}
+                        </span>
+                    </div>
                     <h4 class="publication-text pull-left">
                         {{publication.text}}
                     </h4>
