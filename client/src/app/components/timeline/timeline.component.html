@@ -7,11 +7,19 @@
         <div *ngFor="let publication of publications" class="item-publication">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h4>{{publication.user.name + ' ' + publication.user.surname}}</h4>
 
-                    <div class="publication-text pull-left">
-                        {{publication.text}}
+                    <div class="image-user pull-left">
+                        <a href="#">
+                            <img src="{{ url + 'get-image-user/' + publication.user.image }}" *ngIf="publication.user.image">
+                            <img src="assets/images/avatar-default.png" *ngIf="!publication.user.image">
+                        </a>
                     </div>
+
+                    <div>{{publication.user.name + ' ' + publication.user.surname}}</div>
+
+                    <h4 class="publication-text pull-left">
+                        {{publication.text}}
+                    </h4>
                 </div>
             </div>
         </div>
