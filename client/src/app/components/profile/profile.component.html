@@ -11,9 +11,15 @@
             </div>
             <div class="col-lg-10">
                 <div class="name-surname pull-left">
-                    <p class="username">{{identity.name + ' ' + identity.surname}}</p>
-                    <p class="nickname">{{identity.nick}}</p>
+                    <div class="label label-default pull-left" *ngIf="followed">Te sigue</div>
+                    <br>
+                    <p class="username">{{user.name + ' ' + user.surname}}</p>
+                    <p class="nickname">{{user.nick}}</p>
                     <div class="clearfix"></div>
+                    <div class="follow pull-left">
+                        <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">Seguir</button>
+                        <button class="btn btn-success" *ngIf="following" (click)="unFollowUser(user._id)">Dejar de seguir</button>
+                    </div>
                 </div>
             </div>
         </div>

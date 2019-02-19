@@ -180,6 +180,7 @@
     height: 125px;
     border-radius: 400px;
     overflow: hidden;
+    margin: 2em;
 }
 
 #data-profile .avatar img{
