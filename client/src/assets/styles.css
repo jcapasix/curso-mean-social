@@ -171,3 +171,24 @@
 /* #publications{
     min-height: 500px;
 } */
+
+
+/* perfiles */
+
+#data-profile .avatar{
+    width: 125px;
+    height: 125px;
+    border-radius: 400px;
+    overflow: hidden;
+}
+
+#data-profile .avatar img{
+    width: 100%;
+    height: 100%;
+}
+
+#data-profile .name-surname{
+    padding: 2em;
+    font-weight: 300;
+    font-size: 17px;
+}

@@ -1,6 +1,23 @@
 <div class="col-lg-7">
     <h1 class="h1-strong">{{title}}</h1>
 
+    <div id="data-profile" *ngIf="user">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="avatar pull-left">
+                    <img src="{{ url + 'get-image-user/' + user.image }}" *ngIf="user.image">
+                    <img src="assets/images/avatar-default.png" *ngIf="!user.image"/>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="name-surname pull-left">
+                    <p class="username">{{identity.name + ' ' + identity.surname}}</p>
+                    <p class="nickname">{{identity.nick}}</p>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 

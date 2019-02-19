@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('ProfileComponent de login cargado...')
+        console.log('ProfileComponent cargado...')
         this.loadPage();
     }
 
@@ -48,16 +48,19 @@ export class ProfileComponent implements OnInit{
         this._route.params.subscribe( params =>{
             let id = params['id'];
             this.getUser(id);
-            this.getCounters(id);
+            //this.getCounters(id);
         });
     }
 
     getUser(id){
-        this._userService.getUser(id).subscribe(
 
+        console.log('XXXX!!!!')
+        console.log(id)
+        this._userService.getUser(id).subscribe(
             response =>{
+                console.log(response);
                 if(response.user){
-                    console.log(response);
+                    
                     this.user = response.user;
                 }
             },
@@ -65,22 +68,20 @@ export class ProfileComponent implements OnInit{
                 console.log(<any>error);
                 this._router.navigate(['/profile', this.identity._id])
             }
-
         );
     }
 
     getCounters(id){
         this._userService.getCounters(id).subscribe(
-
             response =>{
                 if(response.user){
+                    console.log('pepsi')
                     this.stats = response;
                 }
             },
             error =>{
                 console.log(<any>error);
             }
-
         );
     }
 }

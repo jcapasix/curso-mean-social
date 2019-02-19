@@ -127,7 +127,7 @@ function getUser(req, res){
 				user, 
 				following: value.following,
 				followed: value.followed,
-				publications: publications
+				publications: value.publications
 			});
 		});
 
