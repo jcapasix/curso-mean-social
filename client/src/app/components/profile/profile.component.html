@@ -18,7 +18,24 @@
                     <div class="clearfix"></div>
                     <div class="follow pull-left">
                         <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">Seguir</button>
-                        <button class="btn btn-success" *ngIf="following" (click)="unFollowUser(user._id)">Dejar de seguir</button>
+                        <!-- <button class="btn btn-success" *ngIf="following" (click)="unFollowUser(user._id)">Dejar de seguir</button> -->
+                        <button class="btn btn-primary" *ngIf="following"
+                                (click)="unFollowUser(user._id)"
+                                (mouseenter)="mouseEnter(user._id)"
+                                (mouseleave)="mouseLeave()"
+                                [class.btn-danger]="user._id == followUserOver"
+                                >
+    
+                                <span  *ngIf="user._id == followUserOver; else following">
+                                    <span class="glyphicon glyphicon-minus-sign"></span>
+                                    Dejar de seguir
+                                </span>
+        
+                                <ng-template #following>
+                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                    Siguiendo
+                                </ng-template>
+                            </button>
                     </div>
                 </div>
             </div>
