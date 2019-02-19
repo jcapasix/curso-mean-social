@@ -1,7 +1,8 @@
 <div class="col-lg-7">
     <h1 class="h1-strong">{{title}}</h1>
 
-    <div id="data-profile" *ngIf="user">
+    <div id="data-profile" class="col-lg-12 col-xs-12 panel panel-default pull-left" *ngIf="user">
+    <!-- <div id="data-profile" *ngIf="user"> -->
         <div class="row">
             <div class="col-lg-2">
                 <div class="avatar pull-left">
@@ -9,7 +10,7 @@
                     <img src="assets/images/avatar-default.png" *ngIf="!user.image"/>
                 </div>
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-4">
                 <div class="name-surname pull-left">
                     <div class="label label-default pull-left" *ngIf="followed">Te sigue</div>
                     <br>
@@ -37,6 +38,42 @@
                                 </ng-template>
                             </button>
                     </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- <div class="clearfix"></div> -->
+                <br><br>
+                <div class="stats" *ngIf="stats">
+                    <div class="following-data">
+                        <a href="#">
+                            <span class="label-stats">
+                                Siguiendo
+                            </span>
+                            <span class="number-stats">
+                                {{stats.following}}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="following-data">
+                        <a href="#">
+                            <span class="label-stats">
+                                Seguidores
+                            </span>
+                            <span class="number-stats">
+                                {{stats.followed}}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="following-data">
+                            <a href="#">
+                                <span class="label-stats">
+                                    Publicaciones
+                                </span>
+                                <span class="number-stats">
+                                    {{stats.publications}}
+                                </span>
+                            </a>
+                        </div>
                 </div>
             </div>
         </div>
