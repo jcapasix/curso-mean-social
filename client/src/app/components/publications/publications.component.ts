@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Publication } from '../../models/publication';
 import { PublicationService } from '../../services/publication.service';
@@ -23,16 +23,11 @@ export class PublicationsComponent implements OnInit{
 
     public status:string;
     public publications: Publication[];
-
-    // public page;
-    // public next_page;
-    // public prev_page;
-
     public total;
     public pages;
     public itemsPerPage;
-    // public users:[User];
-    // public follows;
+
+    @Input() user:string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -48,11 +43,11 @@ export class PublicationsComponent implements OnInit{
 
     ngOnInit(){
         console.log('Componente TimelineComponent cargado...')
-        this.getPublications(this.page);
+        this.getPublications(this.user, this.page);
     }
 
-    getPublications(page, adding=false){
-        this._publicationService.getPublications(this.token, page).subscribe(
+    getPublications(user, page, adding=false){
+        this._publicationService.getPublicationsUser(this.token, user, page).subscribe(
             response => {
                 if(response.publications){
                     this.status = 'success';
@@ -97,13 +92,16 @@ export class PublicationsComponent implements OnInit{
 
 
     viewMore(){
+
+        console.log('viewmore');
+
         if(this.publications.length == this.total){
             this.noMore = true
         }
         else{
             this.page += 1;
         }
-        this.getPublications(this.page, true);
+        this.getPublications(this.user, this.page, true);
     }
 
  
