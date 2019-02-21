@@ -31,9 +31,11 @@
                     <h4 class="publication-text pull-left">
                         {{publication.text}}
                     </h4>
-
-                    <div class="" *ngIf="publication.file">
-                        <img src="{{ url + 'get-image-pub/' + publication.file}}" alt="">
+                    <div class="row">
+                        <br>
+                        <div id="pub-image" *ngIf="publication.file">
+                            <img src="{{ url + 'get-image-pub/' + publication.file}}" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
