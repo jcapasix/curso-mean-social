@@ -92,15 +92,13 @@ export class PublicationsComponent implements OnInit{
 
 
     viewMore(){
-
         console.log('viewmore');
+        this.page += 1;
 
-        if(this.publications.length == this.total){
-            this.noMore = true
+        if(this.page == this.pages){
+            this.noMore = true;
         }
-        else{
-            this.page += 1;
-        }
+        
         this.getPublications(this.user, this.page, true);
     }
 
