@@ -4,13 +4,14 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
 import { Publication} from '../../models/publication';
-import { PublicationService } from '../../services/publication.service'
+import { PublicationService } from '../../services/publication.service';
+import { UploadService } from '../../services/upload.service';
 
 
 @Component({
     selector: "sidebar",
     templateUrl: './sidebar.component.html',
-    providers: [UserService, PublicationService]
+    providers: [UserService, PublicationService, UploadService]
 })
 
 export class SidebarComponent implements OnInit{
@@ -26,7 +27,8 @@ export class SidebarComponent implements OnInit{
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService:UserService,
-        private _publicationService:PublicationService
+        private _publicationService:PublicationService,
+        private _uploadService:UploadService
     ){
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
@@ -44,10 +46,16 @@ export class SidebarComponent implements OnInit{
         this._publicationService.addPublication(this.publication, this.token).subscribe(
             response =>{
                 if(response.publication){
-                    //this.publication = response.publication;
-                    this.status = 'success';
-                    form.reset();
-                    this._router.navigate(['/timeline']);
+                    //subir imagen
+
+                    this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
+                    .then((result:any) =>{
+                        this.publication.file = result.image;
+                        //this.publication = response.publication;
+                        this.status = 'success';
+                        form.reset();
+                        this._router.navigate(['/timeline']);
+                    });
                 }
                 else{
                     this.status = 'error';
@@ -65,6 +73,11 @@ export class SidebarComponent implements OnInit{
             }
         );
         console.log(this.publication);
+    }
+
+    public filesToUpload: Array<File>;
+    fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>>fileInput.target.files;
     }
 
 
